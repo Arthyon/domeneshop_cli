@@ -1,0 +1,17 @@
+[package]
+name = "domeneshop_cli"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.3.17", features = ["derive"] }
+public-ip = "0.2.2"
+tokio = { version = "1.29.1", features = ["macros"] }
+reqwest = { version = "0.11.18", features = ["json"] }
+serde = {version = "1.0.163", features = ["derive"]}
+serde_json = "1.0.96"
+chrono = "0.4.26"
+domeneshop_client = { git = "https://github.com/Arthyon/domeneshop_client.git" }
+simple-log = "1.6.0"
