@@ -4,11 +4,15 @@ extern crate simple_log;
 mod client;
 mod constants;
 mod commands {
+    pub mod domain;
     pub mod dyndns;
+    pub mod invoices;
 }
 
 use client::get_client;
+use commands::domain::handle_domains;
 use commands::dyndns::handle_dyndns;
+use commands::invoices::handle_invoices;
 use domeneshop_client::client::DomeneshopClient;
 use simple_log::{log_level, LogConfigBuilder, SimpleResult};
 use std::fmt::{Debug, Display};
@@ -20,6 +24,8 @@ use clap::Parser;
 #[derive(Parser)]
 pub enum Command {
     Dyndns(commands::dyndns::Command),
+    Domains(commands::domain::DomainArgs),
+    Invoices(commands::invoices::InvoiceArgs),
 }
 
 #[derive(Parser)]
@@ -35,8 +41,6 @@ pub struct Args {
     token: Option<String>,
     #[arg(long)]
     secret: Option<String>,
-    #[arg(long, action)]
-    dry_run: bool,
     #[arg(long, action)]
     debug: bool,
 }
@@ -63,6 +67,8 @@ async fn main() -> ExitCode {
 async fn run_command(client: &DomeneshopClient, args: &Args, data_dir: &PathBuf) -> ExitCode {
     match &args.command {
         Command::Dyndns(command) => handle_dyndns(command, client, data_dir).await,
+        Command::Domains(command) => handle_domains(command, client).await,
+        Command::Invoices(command) => handle_invoices(command, client).await,
     }
 }
 
