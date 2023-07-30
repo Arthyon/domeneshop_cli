@@ -23,8 +23,8 @@ The CLI will accept credentials using the flags `--token` and `--secret`. As a f
 
 Other accepted flags:
 
-- `-d`/`--data-directory`: Directory to use for auxiliary files
-- `-l`/`--log-directory`: Directory to use for execution logs
+- `--data-directory <DIRECTORY>`: Directory to use for auxiliary files
+- `--log-directory <DIRECTORY>`: Directory to use for execution logs
 - `--debug`: Prints additional debug information, and routes the logs to the console in addition to log files
 
 **NOTE**: The CLI does not support adding new DNS records or forwards as of now.
