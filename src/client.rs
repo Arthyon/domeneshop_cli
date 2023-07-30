@@ -3,7 +3,7 @@ use std::{fs, path::PathBuf};
 
 use domeneshop_client::client::{DomeneshopClient, DomeneshopClientConfiguration};
 
-use crate::{constants::CREDENTIALS_FILENAME, log_and_fail, Args};
+use crate::{constants::CREDENTIALS_FILENAME, log_and_fail_with_error, Args};
 
 #[derive(Deserialize)]
 pub struct ApiCredentials {
@@ -24,7 +24,7 @@ pub fn get_client(args: &Args, data_dir: &PathBuf) -> Option<DomeneshopClient> {
 
             match client {
                 Err(err) => {
-                    _ = log_and_fail("Failed to create domeneshop client", err);
+                    _ = log_and_fail_with_error("Failed to create domeneshop client", err);
                     None
                 }
                 Ok(client) => Some(client),
@@ -34,7 +34,7 @@ pub fn get_client(args: &Args, data_dir: &PathBuf) -> Option<DomeneshopClient> {
 }
 
 fn get_api_credentials(args: &Args, data_dir: &PathBuf) -> Option<ApiCredentials> {
-    match (&args.secret, &args.token) {
+    match (&args.global_opts.secret, &args.global_opts.token) {
         (Some(secret), Some(token)) => {
             println!("Using credentials from arguments");
             Some(ApiCredentials {

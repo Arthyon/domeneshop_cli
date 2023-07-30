@@ -3,10 +3,10 @@ use std::process::ExitCode;
 use clap::*;
 use domeneshop_client::{
     client::DomeneshopClient,
-    endpoints::domains::{Domain, DomainId},
+    endpoints::domains::{Domain, DomainId, WebhotelType},
 };
 
-use crate::log_and_fail;
+use crate::log_and_fail_with_error;
 
 #[derive(Parser)]
 pub struct DomainArgs {
@@ -22,7 +22,7 @@ pub enum Command {
 
 #[derive(Parser)]
 pub struct ListDomainArgs {
-    #[arg(short, long)]
+    #[arg(short, long, help = "Filters domain list on given value")]
     filter: Option<String>,
 }
 
@@ -46,7 +46,7 @@ async fn get_domain(client: &DomeneshopClient, id: DomainId) -> ExitCode {
             print_domain(domain);
             ExitCode::SUCCESS
         }
-        Err(err) => log_and_fail("Failed to get domain", err),
+        Err(err) => log_and_fail_with_error("Failed to get domain", err),
     }
 }
 
@@ -59,7 +59,7 @@ async fn list_domains(client: &DomeneshopClient, args: &ListDomainArgs) -> ExitC
     };
 
     match response {
-        Err(err) => log_and_fail("Failed to list domains", err),
+        Err(err) => log_and_fail_with_error("Failed to list domains", err),
         Ok(domains) => {
             println!("Got {} domains.", domains.len());
             for domain in domains {
@@ -71,5 +71,33 @@ async fn list_domains(client: &DomeneshopClient, args: &ListDomainArgs) -> ExitC
 }
 
 fn print_domain(domain: Domain) {
-    println!("{}: {}", domain.id, domain.domain);
+    println!("{}", domain.domain);
+    println!("Registrant: {}", domain.registrant);
+    if let Some(registered_date) = domain.registered_date {
+        println!("Registered at {}", registered_date);
+    }
+    println!("Expires at {}", domain.expiry_date);
+    println!("Status: {}", domain.status);
+    println!("Renewal: {}", domain.renew);
+    println!("Nameservers");
+    for ns in domain.nameservers {
+        println!("\t{}", ns);
+    }
+    println!("Services:");
+    if domain.services.registrar {
+        println!("\tRegistrar");
+    }
+    if domain.services.dns {
+        println!("\tDNS");
+    }
+    if domain.services.email {
+        println!("\tE-Mail");
+    }
+    match domain.services.webhotel {
+        WebhotelType::WebXLarge => println!("Webhotel Extra Large"),
+        WebhotelType::WebLarge => println!("Webhotel Large"),
+        WebhotelType::WebMedium => println!("Webhotel Medium"),
+        WebhotelType::WebSmall => println!("Webhotel Starter"),
+        _ => (),
+    };
 }

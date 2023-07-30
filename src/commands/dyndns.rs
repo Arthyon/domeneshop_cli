@@ -5,7 +5,7 @@ use clap::Parser;
 use domeneshop_client::client::DomeneshopClient;
 
 use crate::constants::{DYNDNS_EXECUTION_LOG_FILENAME, LAST_IP_FILENAME};
-use crate::log_and_fail;
+use crate::log_and_fail_with_error;
 
 #[derive(Parser)]
 pub struct Command {
@@ -36,7 +36,9 @@ async fn update_dyndns(
     let last_ip = get_last_ip_address(&last_ip_file);
     if let Some(last_ip) = last_ip {
         if last_ip == ip {
-            info!("IP hasn't changed since last time. Exiting");
+            let message = "IP hasn't changed since last time. Exiting";
+            info!("{message}");
+            println!("{message}");
             return ExitCode::SUCCESS;
         }
     }
@@ -44,12 +46,13 @@ async fn update_dyndns(
     let result = client.update_dyndns(domain, Some(ip)).await;
     match result {
         Ok(_) => {
-            info!("Updated ip to {}", ip);
+            info!("Updated ip to {ip}");
+            println!("Updated ip to {ip}");
             update_last_ip(ip, &last_ip_file);
             log_execution(ip, last_ip, &data_dir);
             return ExitCode::SUCCESS;
         }
-        Err(err) => log_and_fail("Error while updating dns settings", err),
+        Err(err) => log_and_fail_with_error("Error while updating dns settings", err),
     }
 }
 
