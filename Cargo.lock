@@ -653,7 +653,7 @@ dependencies = [
 [[package]]
 name = "domeneshop_client"
 version = "0.1.0"
-source = "git+https://github.com/Arthyon/domeneshop_client.git#74931e217c583be468b5e911cd13e3447de5f787"
+source = "git+https://github.com/Arthyon/domeneshop_client.git?rev=598519cbbe31db1a786846e5721971a32f661ac7#598519cbbe31db1a786846e5721971a32f661ac7"
 dependencies = [
  "async-trait",
  "base64 0.21.2",
@@ -663,6 +663,7 @@ dependencies = [
  "http-types",
  "reqwest",
  "serde",
+ "serde_json",
  "url",
 ]
 
