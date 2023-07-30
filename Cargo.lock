@@ -653,13 +653,12 @@ dependencies = [
 [[package]]
 name = "domeneshop_client"
 version = "0.1.0"
-source = "git+https://github.com/Arthyon/domeneshop_client.git?rev=598519cbbe31db1a786846e5721971a32f661ac7#598519cbbe31db1a786846e5721971a32f661ac7"
+source = "git+https://github.com/Arthyon/domeneshop_client.git?rev=1441350b218d826d8ebe947f5305b1cee99c4acb#1441350b218d826d8ebe947f5305b1cee99c4acb"
 dependencies = [
  "async-trait",
  "base64 0.21.2",
  "bytes",
  "chrono",
- "false",
  "http-types",
  "reqwest",
  "serde",
@@ -720,12 +719,6 @@ name = "event-listener"
 version = "2.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0206175f82b8d6bf6652ff7d71a1e27fd2e4efde587fd368662814d6ec1d9ce0"
-
-[[package]]
-name = "false"
-version = "0.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "849bcc293a0d93c4d4adbebc8decf828a832a1d5e445af888cd99bc81ec0f96b"
 
 [[package]]
 name = "fastrand"
