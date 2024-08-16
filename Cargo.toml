@@ -11,7 +11,7 @@ public-ip = "0.2.2"
 tokio = { version = "1.39.2", features = ["macros"] }
 reqwest = { version = "0.12.4", features = ["json"] }
 serde_json = "1.0.125"
-serde = {version = "1.0.207", features = ["derive"]}
+serde = {version = "1.0.208", features = ["derive"]}
 chrono = "0.4.38"
 domeneshop_client = { git = "https://github.com/Arthyon/domeneshop_client.git", rev = "1441350b218d826d8ebe947f5305b1cee99c4acb" }
 simple-log = "1.6.0"
