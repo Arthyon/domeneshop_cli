@@ -1347,12 +1347,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "28b29a3cd74f0f4598934efe3aeba42bae0eb4680554128851ebbecb02af14e6"
 
 [[package]]
-name = "is_debug"
-version = "1.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "06d198e9919d9822d5f7083ba8530e04de87841eaf21ead9af8f2304efd57c89"
-
-[[package]]
 name = "itoa"
 version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2169,11 +2163,10 @@ dependencies = [
 
 [[package]]
 name = "simple-log"
-version = "1.8.2"
+version = "1.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b30f496ce6101916af7025c6cbb89d48a49f5b5af0ffd9a9e52bc132ffbfd101"
+checksum = "94263a9019c994147d7dc572aa1b3bce100bbdf5b5e3a8a446a025c80ecba169"
 dependencies = [
- "is_debug",
  "log",
  "log4rs",
  "once_cell",
