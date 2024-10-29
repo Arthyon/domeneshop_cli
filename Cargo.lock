@@ -2163,14 +2163,15 @@ dependencies = [
 
 [[package]]
 name = "simple-log"
-version = "1.9.0"
+version = "2.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "94263a9019c994147d7dc572aa1b3bce100bbdf5b5e3a8a446a025c80ecba169"
+checksum = "947f8c2d912e08925082b695d3d9a49534c1f728108f3c02c35e3fc85964a0b9"
 dependencies = [
  "log",
  "log4rs",
  "once_cell",
  "serde",
+ "winnow",
 ]
 
 [[package]]
@@ -2964,6 +2965,15 @@ name = "windows_x86_64_msvc"
 version = "0.52.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dff9641d1cd4be8d1a070daf9e3773c5f67e78b4d9d42263020c057706765c04"
+
+[[package]]
+name = "winnow"
+version = "0.6.20"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "36c1fec1a2bb5866f07c25f68c26e565c4c200aebb96d7e55710c19d3e8ac49b"
+dependencies = [
+ "memchr",
+]
 
 [[package]]
 name = "winreg"
